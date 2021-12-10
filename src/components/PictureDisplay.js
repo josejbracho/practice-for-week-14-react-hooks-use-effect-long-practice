@@ -9,7 +9,7 @@ import feather7 from "../images/feather7.svg";
 import feather8 from "../images/feather8.svg";
 import feather9 from "../images/feather9.svg";
 import featherA from "../images/featherA.svg";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const feathers = [
     feather1,
@@ -25,6 +25,7 @@ const feathers = [
 ];
 
 function PictureDisplay ({ sizeClass, featherCount, featherColors }) {
+  const [colorsArr, setColorsArr] = useState([]);
 
   useEffect(() => {
     console.log('PictureDisplay feather count', featherCount);
@@ -36,15 +37,19 @@ function PictureDisplay ({ sizeClass, featherCount, featherColors }) {
   
   // TODO: Wrap in useEffect
 
-  const colors = [];
-  if (!featherColors || featherColors.length === 0) featherColors = [''];
-  for (let i=0; i<featherCount; i++) {
-    colors.push(featherColors[i % featherColors.length]);
-  }
+  useEffect(() => {
+    const colors = [];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (!featherColors || featherColors.length === 0) featherColors = [''];
+    for (let i=0; i<featherCount; i++) {
+      colors.push(featherColors[i % featherColors.length]);
+    }
+    setColorsArr([...colors])
+  }, [featherCount, featherColors])
 
   return (
     <div className={`image-area ${sizeClass}`}>
-      {colors.map((c, i) =>
+      {colorsArr.map((c, i) =>
         <img  
             key={feathers[i]} 
             src={feathers[i]} 

@@ -3,7 +3,7 @@ import Message from "./components/Message";
 import PictureDisplay from "./components/PictureDisplay";
 
 function App() {
-  const [size, setSize] = useState('s');
+  const [size, setSize] = useState('m');
   const [featherCount, setFeatherCount] = useState(0);
   const [featherColors, setFeatherColors] = useState([]);
   const [isRed, setIsRed] = useState(false);
@@ -29,8 +29,8 @@ function App() {
         console.log('PictureDisplay size', size);
         let cname = '';
         switch (size) {
-            case 'm':
-                cname = 'medium';
+            case 's':
+                cname = 'small';
                 break
             case 'l':
                 cname = 'large';
@@ -39,7 +39,7 @@ function App() {
                 cname = 'xlarge';
                 break
             default:
-                cname = 'small'
+                cname = 'medium'
                 break
         }
         setSizeClass(cname);
